@@ -71,7 +71,7 @@ public class Player : Controller {
     }
 
     private void GetDash() {
-        if (Input.GetKeyDown(dashKey) && canDash) {
+        if (Input.GetKeyDown(dashKey) && moveDirection != 0f && canDash) {
             Dash();
         }
     }

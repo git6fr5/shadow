@@ -13,7 +13,6 @@ using ActionState = Controller.ActionState;
 /// Handles the collision framework and animation
 /// </summary>
 [RequireComponent(typeof(SpriteRenderer))]
-[RequireComponent(typeof(CircleCollider2D))]
 public class Mesh : MonoBehaviour {
 
     /* --- Data Structures --- */
@@ -45,11 +44,10 @@ public class Mesh : MonoBehaviour {
     };
 
     /* --- Components --- */
-    [HideInInspector] private Controller controller;
-    [HideInInspector] private CircleCollider2D collisionBall;
+    [HideInInspector] public Controller controller;
     [HideInInspector] public SpriteRenderer spriteRenderer;
     [Space(2), Header("Collisions")]
-    [SerializeField] public Hurtbox hurtbox; // Handles the damage collision checks.
+    [SerializeField] public Bodybox bodybox; // Handles the damage collision checks.
     [SerializeField] public Feetbox feetbox; // Handles the ground collision checks.
 
     /* --- Parameters --- */
@@ -90,7 +88,6 @@ public class Mesh : MonoBehaviour {
     private void Init() {
         controller = transform.parent.GetComponent<Controller>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        collisionBall = GetComponent<CircleCollider2D>();
         animationData = new AnimationData(idle, 0, idle.Length);
     }
 

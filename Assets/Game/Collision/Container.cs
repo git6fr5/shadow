@@ -7,11 +7,11 @@ using UnityEngine;
 /// Stores current collision data
 /// For objects labeled with the targeted tag.
 /// </summary>
-[RequireComponent(typeof(BoxCollider2D))]
+[RequireComponent(typeof(Collider2D))]
 public class Container : MonoBehaviour {
 
     /* --- Components --- */
-    [HideInInspector] protected Collider2D collisionFrame;
+    [HideInInspector] public Collider2D collisionFrame;
 
     /* --- Properties --- */
     // A container to store all objects currently in contact with.
@@ -30,7 +30,7 @@ public class Container : MonoBehaviour {
         Add(collider);
     }
 
-    private void OnTriggerExit2D(Collider2D collider) {
+    protected virtual void OnTriggerExit2D(Collider2D collider) {
         Remove(collider);
     }
 

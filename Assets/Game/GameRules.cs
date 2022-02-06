@@ -16,6 +16,7 @@ public class GameRules : MonoBehaviour {
     /* --- Static Objects --- */
     // Player.
     public static Player MainPlayer;
+    public static bool PlayerInLight;
     // Camera.
     public static UnityEngine.Camera MainCamera;
 
@@ -30,6 +31,10 @@ public class GameRules : MonoBehaviour {
     public static float FrameRate = 8f;
     public static float OutlineWidth = 1f / 16f;
 
+    /* --- Debug --- */
+    [SerializeField] private float timeScale;
+    [SerializeField, ReadOnly] private bool playerInLight;
+
     /* --- Unity --- */
     // Runs once before the first frame.
     void Start() {
@@ -40,14 +45,16 @@ public class GameRules : MonoBehaviour {
     void Update() {
 
         // Check out of bounds.
-        if (InLight()) {
-            ResetLevel();
-        }
+        float deltaTime = Time.deltaTime;
+        PlayerInLight = InLight(deltaTime);
 
         // Check out of bounds.
         if (OutOfBounds()) {
             ResetLevel();
         }
+
+        playerInLight = PlayerInLight;
+        Time.timeScale = timeScale;
 
     }
 
@@ -58,7 +65,13 @@ public class GameRules : MonoBehaviour {
     }
 
     /* --- Static Methods --- */
-    private static bool InLight() {
+    private static bool InLight(float deltaTime) {
+        Lamp[] lamp = (Lamp[])GameObject.FindObjectsOfType(typeof(Lamp));
+        for (int i = 0; i < lamp.Length; i++) {
+            if (lamp[i].CheckForPlayer(deltaTime)) {
+                return true;
+            }
+        }
         return false;
     }
 

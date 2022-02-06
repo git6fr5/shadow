@@ -82,6 +82,9 @@ public class Player : Controller {
         if (!mesh.feetbox.empty && dashTimer == null) {
             canJump = true;
         }
+        else {
+            canJump = false;
+        }
     }
 
     private void CheckDash() {
@@ -89,6 +92,7 @@ public class Player : Controller {
             canDash = true;
             actionFlag = ActionState.None;
         }
+
     }
 
     private void Jump() {
@@ -107,18 +111,38 @@ public class Player : Controller {
 
         IEnumerator IEDash(float delay) {
             yield return new WaitForSeconds(0.15f);
+
+            if (!GameRules.PlayerInLight) {
+                mesh.bodybox.collisionFrame.isTrigger = true;
+            }
+
             body.velocity = dashVector * dashSpeed;
             actionFlag = ActionState.Action;
             int afterImages = 3;
             for (int i = 0; i < afterImages; i++) {
                 AfterImage(mesh, delay, 0.5f);
+                if (!mesh.bodybox.emptySpace) {
+                    SnapToGrid(dashVector);
+                }
+                yield return new WaitForSeconds(delay / (float)afterImages);
+            }
+            while (!mesh.bodybox.emptySpace) {
+                AfterImage(mesh, delay, 0.5f);
+                SnapToGrid(dashVector);
                 yield return new WaitForSeconds(delay / (float)afterImages);
             }
             think = true;
+            mesh.bodybox.collisionFrame.isTrigger = false;
             actionFlag = ActionState.None;
             yield return (dashTimer = null);
         }
 
+    }
+
+    private void SnapToGrid(Vector2 dashVector) {
+        Vector3 position = transform.position;
+        position += (Vector3)dashVector;
+        transform.position = new Vector3(Mathf.Round(position.x), Mathf.Round(position.y), 0f);
     }
 
     private static void AfterImage(Mesh mesh, float delay, float transparency) {
@@ -131,4 +155,10 @@ public class Player : Controller {
         afterImage.color = Color.white * transparency;
         Destroy(afterImage.gameObject, delay);
     }
+
+    void OnDrawGizmos() {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, 0.5f);
+    }
+
 }

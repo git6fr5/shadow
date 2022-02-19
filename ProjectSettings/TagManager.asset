@@ -45,15 +45,15 @@ TagManager:
   - name: Background
     uniqueID: 813967071
     locked: 0
-  - name: Border
-    uniqueID: 913515477
-    locked: 0
-  - name: World
-    uniqueID: 1418623495
-    locked: 0
   - name: Lights
     uniqueID: 558165041
     locked: 0
   - name: Characters
     uniqueID: 1764489181
+    locked: 0
+  - name: World
+    uniqueID: 1418623495
+    locked: 0
+  - name: Border
+    uniqueID: 913515477
     locked: 0

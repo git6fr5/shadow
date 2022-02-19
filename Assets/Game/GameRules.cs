@@ -19,6 +19,8 @@ public class GameRules : MonoBehaviour {
     public static bool PlayerInLight;
     // Camera.
     public static UnityEngine.Camera MainCamera;
+    // Loader.
+    public static LevelLoader MainLoader;
 
     /* --- Static Variables --- */
     // Mouse.
@@ -44,6 +46,10 @@ public class GameRules : MonoBehaviour {
     // Runs once every frame.
     void Update() {
 
+        if (!CheckRules()) {
+            return;
+        }
+
         // Check out of bounds.
         float deltaTime = Time.deltaTime;
         PlayerInLight = InLight(deltaTime);
@@ -61,7 +67,27 @@ public class GameRules : MonoBehaviour {
     /* --- Methods --- */
     private void Init() {
         MainPlayer = (Player)GameObject.FindObjectOfType(typeof(Player));
+        MainLoader = (LevelLoader)GameObject.FindObjectOfType(typeof(LevelLoader));
         MainCamera = Camera.main;
+    }
+
+    public static void Init(Player player, LevelLoader loader, Camera camera) {
+        MainPlayer = player;
+        MainLoader = loader;
+        MainCamera = camera;
+    }
+
+    public bool CheckRules() {
+        if (MainPlayer == null) {
+            return false;
+        }
+        if (MainLoader == null) {
+            return false;
+        }
+        if (MainCamera == null) {
+            return false;
+        }
+        return true;
     }
 
     /* --- Static Methods --- */
@@ -76,11 +102,36 @@ public class GameRules : MonoBehaviour {
     }
 
     private static bool OutOfBounds() {
+        Vector3 position = MainPlayer.transform.position;
+        print(position);
+        if (position.x < 0f || position.x > 16f) {
+            return true;
+        }
+        if (position.y > 1f || position.y < -12f) {
+            return true;
+        }
         return false;
     }
 
-    private static void ResetLevel() {
+    public static void NextLevel() {
+        if (MainLoader != null) {
+            if (MainLoader.GetLevelByID(MainLoader.lDtkData, MainLoader.id + 1) != null) {
+                MainLoader.id += 1;
+            }
+            MainLoader.load = true;
+        }
+        else {
+            print("Resetting Level");
+        }
+    }
 
+    public static void ResetLevel() {
+        if (MainLoader != null) {
+            MainLoader.load = true;
+        }
+        else {
+            print("Resetting Level");
+        }
     }
 
 }

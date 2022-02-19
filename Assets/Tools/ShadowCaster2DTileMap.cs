@@ -1,6 +1,8 @@
 /* --- Libraries --- */
 using System.Linq;
 using System.Reflection;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
 
@@ -38,7 +40,19 @@ public class ShadowCaster2DTileMap : MonoBehaviour {
     }
 
     /* --- Methods --- */
-    public void Generate() {
+    public void Generate(float delay) {
+
+        StartCoroutine(IEGenerate(delay));
+
+        IEnumerator IEGenerate(float delay) {
+            yield return new WaitForSeconds(delay);
+            Generate();
+            yield return null;
+        }
+
+    }
+
+    private void Generate() {
         DestroyAllChildren();
 
         tilemapCollider = GetComponent<CompositeCollider2D>();
@@ -57,6 +71,10 @@ public class ShadowCaster2DTileMap : MonoBehaviour {
             //}
 
             for (int j = 0; j < pathVertices.Length; j++) {
+
+                // Find the center on the grid for the vertex.
+                
+
                 pathVertices[j] = pathVertices[j] + Vector2.down * (2f / 8f);
             }
 

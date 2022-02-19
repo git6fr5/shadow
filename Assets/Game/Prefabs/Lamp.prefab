@@ -54,10 +54,10 @@ MonoBehaviour:
   m_UseNormalMap: 0
   m_LightOrder: 0
   m_AlphaBlendOnOverlap: 0
-  m_ShadowIntensity: 1
+  m_ShadowIntensity: 0.85
   m_ShadowVolumeIntensity: 0
-  m_PointLightInnerAngle: 60
-  m_PointLightOuterAngle: 70
+  m_PointLightInnerAngle: 30
+  m_PointLightOuterAngle: 60
   m_PointLightInnerRadius: 5
   m_PointLightOuterRadius: 6
   m_PointLightDistance: 3
@@ -83,6 +83,7 @@ GameObject:
   - component: {fileID: 1376845520528852547}
   - component: {fileID: 1376845520528852546}
   - component: {fileID: 1376845520528852548}
+  - component: {fileID: 1523545627267800639}
   m_Layer: 0
   m_Name: Lamp
   m_TagString: Untagged
@@ -175,6 +176,20 @@ MonoBehaviour:
   range: 5
   precision: 30
   glowGrowRate: 0.95
+--- !u!114 &1523545627267800639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1376845520528852545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eeaef8cd415bacc49a58b8ae9cd117b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vectorID: {x: 3, y: 0}
+  gridPosition: {x: 0, y: 0}
 --- !u!1 &1376845521049260135
 GameObject:
   m_ObjectHideFlags: 0

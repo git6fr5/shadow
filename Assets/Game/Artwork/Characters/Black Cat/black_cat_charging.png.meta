@@ -8,6 +8,24 @@ TextureImporter:
   - first:
       213: 4286140947657507071
     second: black_cat_charging_1
+  - first:
+      213: 5929334658891951623
+    second: black_cat_charging_2
+  - first:
+      213: 3521314852344878632
+    second: black_cat_charging_3
+  - first:
+      213: -445910179832851954
+    second: black_cat_charging_4
+  - first:
+      213: -2703525344247973364
+    second: black_cat_charging_5
+  - first:
+      213: -4775282664963643133
+    second: black_cat_charging_6
+  - first:
+      213: -8097620191653169367
+    second: black_cat_charging_7
   externalObjects: {}
   serializedVersion: 11
   mipmaps:

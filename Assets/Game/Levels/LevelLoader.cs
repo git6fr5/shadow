@@ -24,6 +24,8 @@ public class LevelLoader : MonoBehaviour {
     public static string PlatformLayer = "Platform";
     public static string FloorLayer = "Floor";
     public static string BorderLayer = "Border";
+    public static string LevelTag = "Level_";
+
 
     /* --- Data Structures --- */
     public class LDtkTileData {
@@ -71,16 +73,20 @@ public class LevelLoader : MonoBehaviour {
 
         // Get the json file from the LDtk Data.
         LdtkJson json = lDtkData.FromJson();
+        print(json);
 
         // Read the json data.
         level.gridSize = (int)json.DefaultGridSize;
         level.height = (int)(json.DefaultLevelHeight / json.DefaultGridSize);
         level.width = (int)(json.DefaultLevelWidth / json.DefaultGridSize);
 
-        // Grab the level by the id.
-        if (id < json.Levels.Length && id >= 0) {
-            return json.Levels[id];
+        LDtkUnity.Level[] levels = json.Worlds[0].Levels;
+        for (int i = 0; i < levels.Length; i++) {
+            if (levels[i].Identifier == LevelTag + id.ToString()) {
+                return levels[i];
+            }
         }
+
         Debug.Log("Could not find room");
         return null;
     }

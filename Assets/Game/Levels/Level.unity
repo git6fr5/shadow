@@ -3129,10 +3129,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79dd62da880ab134ea3641565409ce7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lDtkData: {fileID: 6541833137719571971, guid: 6a0271cfe31f5e24991c7114f4ea1120, type: 3}
+  lDtkData: {fileID: 6541833137719571971, guid: c8c75b1441e2d6c41a1e4ca75fcbe74a, type: 3}
   level: {fileID: 1773804448625073269}
   load: 1
-  id: 5
+  id: 0
 --- !u!114 &1773804448625073271
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -30,15 +30,7 @@ public class Environment : MonoBehaviour {
     /* --- Unity --- */
     // Runs once before the first frame.
     void Start() {
-        RefreshTiles();
         RefreshEntities();
-    }
-
-    /* --- Tile Methods --- */
-    public void RefreshTiles() {
-        // floorTile = (FloorTile)ScriptableObject.CreateInstance(typeof(FloorTile));
-        // floorTile.Init(floorSprites);
-        // floorTile = floorSprites;
     }
 
     /* --- Entity Methods --- */

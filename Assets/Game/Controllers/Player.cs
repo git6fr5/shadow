@@ -92,7 +92,6 @@ public class Player : Controller {
             canDash = true;
             actionFlag = ActionState.None;
         }
-
     }
 
     private void Jump() {
@@ -109,6 +108,7 @@ public class Player : Controller {
         body.velocity = new Vector2(body.velocity.x, 0f);
         dashTimer = StartCoroutine(IEDash(dashDuration));
         actionFlag = ActionState.PreAction;
+        canDash = false;
 
         IEnumerator IEDash(float delay) {
             yield return new WaitForSeconds(0.15f);

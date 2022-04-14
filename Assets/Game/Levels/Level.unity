@@ -3132,7 +3132,7 @@ MonoBehaviour:
   lDtkData: {fileID: 6541833137719571971, guid: 6a0271cfe31f5e24991c7114f4ea1120, type: 3}
   level: {fileID: 1773804448625073269}
   load: 1
-  id: 1
+  id: 5
 --- !u!114 &1773804448625073271
 MonoBehaviour:
   m_ObjectHideFlags: 0
